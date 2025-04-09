@@ -1,2 +1,1 @@
-# py-fastapi
-Python FastAPI Demo Project
+# Python FastAPI Demo Project
