@@ -7,5 +7,3 @@
 - Ensure that you python3 installed by running `python3 --version`
 - Run `pip install -r requirements.txt` to install all the dependecies/packages.
 
-
-
