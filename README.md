@@ -21,7 +21,6 @@
 
 # Troubleshooting
 
-
 ## Address already in use
 
 - List the process using port: `lsof -i :<PORT>`

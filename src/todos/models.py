@@ -1,7 +1,7 @@
 # database models
 
-from database import Base
-from sqlalchemy import Column, Integer, String, Boolean
+from ..database import Base
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 
 class Todos(Base):
     __tablename__ = 'todos'
@@ -11,4 +11,4 @@ class Todos(Base):
     description = Column(String)
     priority = Column(Integer)
     complete = Column(Boolean, default=False)
-    
+    owner_id = Column(Integer, ForeignKey("users.id"))
