@@ -8,22 +8,26 @@ from .models import *
 from ..auth.router import get_user
 from ..database import db_dependency
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api/todos"
+)
 
 user_dependency = Annotated[dict, Depends(get_user)]
 
-@router.get("/todos")
-async def get_todos(db: db_dependency):
+@router.get("")
+async def get_todos(user: user_dependency, 
+                    db: db_dependency):
+    print("User.........", user)
     return db.query(Todos).all()
 
-@router.get("/todos/{id}", status_code=status.HTTP_200_OK)
+@router.get("/{id}", status_code=status.HTTP_200_OK)
 async def get_todo(db: db_dependency, id: int = Path(gt=0)):
     record = db.query(Todos).get(id)
     if record is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     return record
 
-@router.post("/todos", status_code=status.HTTP_201_CREATED)
+@router.post("", status_code=status.HTTP_201_CREATED)
 async def create_todo(user: user_dependency,
                       db: db_dependency, 
                       todo: TodoRequest):
@@ -34,7 +38,7 @@ async def create_todo(user: user_dependency,
     db.add(todo_model)
     db.commit()
 
-@router.put("/todos/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.put("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def update_todos(db: db_dependency, 
                        todo: TodoRequest,
                        id: int = Path(gt=0)):
@@ -49,7 +53,7 @@ async def update_todos(db: db_dependency,
     db.add(record)
     db.commit()
 
-@router.delete("/todos/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_todo(db: db_dependency, id: int = Path(gt=0)):
     todo = db.query(Todos).get(id)
     if todo is None:

@@ -2,7 +2,8 @@
 
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi.templating import Jinja2Templates
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -16,7 +17,7 @@ SECRET_KEY = "d0b75e04a1e07a02c7f131fd7f37bdd98dffd3fa313cbd985454bedcf5d611b"
 ALGORITHM = 'HS256'
 
 router = APIRouter(
-    prefix='/auth',
+    prefix='/api/auth',
     tags=['auth']
 )
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated="auto")

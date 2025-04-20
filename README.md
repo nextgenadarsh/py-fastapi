@@ -14,10 +14,15 @@
 ## Running API
 
 - Install `pip install "fastapi[standard]"`
-- Run api `uvicorn src.controllers.books:app --reload`
-- Run api `fastapi run src/controllers/books.py`
-- Run api `fastapi dev src/controllers/books.py`
-- Run `uvicorn src.controllers.books:app --reload` to run the application
+- Run api `uvicorn api.controllers.books:app --reload`
+- Run api `fastapi run api/controllers/books.py`
+- Run api `fastapi dev api/controllers/books.py`
+- Run `uvicorn api.controllers.books:app --reload` to run the application
+- Swagger runs on `http://127.0.0.1:8000/docs#/`
+
+## Running tests
+
+- Run `pytest` to run all the tests
 
 # Troubleshooting
 
